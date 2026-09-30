@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#06131f">
+  <meta name="description" content="Open Odyssey：寫下今天，讓海回應你。往自己定義的伊薩卡航行。">
+  <title>Open Odyssey — 往心裡的海航行</title>
+  <link rel="preload" href="a2r-clean-backplate.png" as="image" media="(min-width: 801px) and (min-aspect-ratio: 9/8)">
+  <link rel="preload" href="a2-hero-mobile-clean.png" as="image" media="(max-width: 800px)">
+  <link rel="stylesheet" href="landing-a2.css">
+  <script type="module" src="landing-a2.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#journal">跳至旅程介紹</a>
+  <header class="site-header">
+    <a class="site-brand" href="#top" aria-label="Open Odyssey 首頁"><span class="brand-star" aria-hidden="true">✧</span><span>Open Odyssey</span></a>
+    <nav aria-label="主要導覽">
+      <a href="#journal">航海日誌</a>
+      <a href="#atlas">海域</a>
+      <a href="#harbor">港灣</a>
+      <button class="motion-button" type="button" aria-pressed="false">減少動態</button>
+    </nav>
+  </header>
+  <main>
+    <section class="hero-journey" id="top" aria-labelledby="hero-heading">
+      <div class="hero-sticky">
+        <div class="hero-frame">
+        <div class="hero-scene" role="img" aria-label="從船首望向海面與雲間島嶼，弧形 ODYSSEY 字樣浮現於天空">
+          <img class="hero-backplate" src="a2r-clean-backplate.png" alt="" fetchpriority="high">
+          <img class="hero-ocean" src="a2r-clean-backplate.png" alt="">
+          <img class="hero-wordmark" src="a2r-clean-wordmark.png" alt="">
+          <img class="hero-island" src="a2r-clean-island.png" alt="">
+          <div class="hero-depth" aria-hidden="true"></div>
+          <div class="hero-grain" aria-hidden="true"></div>
+          <img class="hero-ship" src="a2r-clean-ship.png" alt="">
+        </div>
+        <img class="hero-mobile-scene" src="a2-hero-mobile-clean.png" alt="" aria-hidden="true">
+        <svg class="hero-mobile-wordmark" viewBox="0 0 390 140" aria-hidden="true"><defs><path id="mobile-odyssey-arc" d="M 12 108 Q 195 37 378 108"/></defs><text text-anchor="middle"><textPath href="#mobile-odyssey-arc" startOffset="50%">ODYSSEY</textPath></text></svg>
+        <p class="hero-aside hero-aside-left">每一次書寫<br>都是一場航行<br>而海，總會回應</p>
+        <p class="hero-aside hero-aside-right">有些風浪<br>會帶你走向更真的自己</p>
+        <div class="hero-copy">
+          <h1 id="hero-heading">往心裡的海 <span>航行</span></h1>
+          <p>寫下今天，讓海回應你</p>
+          <a class="button button-gold" href="#journal">開始航行 <span aria-hidden="true">→</span></a>
+        </div>
+        <a href="#chart-intro" class="scroll-invitation">向下探索 <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="chart-overlay" id="chart-intro">
+          <svg class="chart-isobaths" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <path d="M-100 115 C105 15 231 173 416 94 S728 33 891 132 1206 198 1545 87"/>
+            <path d="M-130 225 C142 90 227 278 413 209 S738 132 907 251 1231 300 1566 188"/>
+            <path d="M-147 349 C114 216 260 386 439 327 S732 258 917 372 1240 420 1560 317"/>
+            <path d="M-124 485 C116 358 267 535 449 458 S769 389 931 500 1283 539 1568 449"/>
+            <path d="M-106 633 C158 491 279 685 481 603 S767 535 965 648 1268 675 1545 601"/>
+            <path d="M-89 784 C174 634 306 829 513 761 S825 689 1010 801 1301 839 1552 763"/>
+          </svg>
+          <svg class="chart-route" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <path class="chart-route-halo" d="M160 788 C430 790 650 760 900 705 C1070 670 1110 390 1252 208"/>
+            <path class="chart-route-stroke" pathLength="1" d="M160 788 C430 790 650 760 900 705 C1070 670 1110 390 1252 208"/>
+            <circle cx="160" cy="788" r="7"/><circle cx="1252" cy="208" r="7"/>
+          </svg>
+          <div class="chart-compass" aria-hidden="true"><span>✧</span></div>
+          <div class="passage" aria-label="航程引言">
+            <p>把一句話交給海<br><strong>看世界如何回應</strong></p>
+            <span aria-hidden="true">✧</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="journal-section" id="journal" aria-labelledby="journal-heading">
+      <div class="journal-container">
+        <div class="journal-lead">
+          <span class="overline">THE VOYAGE LOG</span>
+          <h2 id="journal-heading">今天的風<br><em>從哪裡吹來</em></h2>
+          <p>不需要寫得漂亮。留下真實的一句，海象就有了方向</p>
+          <div class="journal-choices" aria-label="選擇日誌內容">
+            <button type="button" data-journal="0" aria-pressed="true">今天很難</button>
+            <button type="button" data-journal="1" aria-pressed="false">往前一步</button>
+            <button type="button" data-journal="2" aria-pressed="false">聽見別的聲音</button>
+          </div>
+        </div>
+        <div class="journal-stage">
+          <div class="journal-weather" aria-hidden="true">
+            <img src="a-scene-2.jpg" alt="">
+          </div>
+          <div class="journal-sheet">
+            <div class="journal-sheet-top"><span>航海日誌</span><span>小安</span></div>
+            <p class="written-entry" data-entry>今天的浪很大<br>我想先學會穩住自己</p>
+            <span class="journal-signature">小安 · 記於海上</span>
+          </div>
+          <p class="weather-status" aria-live="polite">風暴中，燈還亮著</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="atlas-section" id="atlas" aria-labelledby="atlas-heading">
+      <div class="atlas-intro">
+        <span class="overline">FIVE STATES OF THE SEA</span>
+        <h2 id="atlas-heading">海不只有<br><em>一種模樣</em></h2>
+        <p>五片海不是關卡。它們只是生命裡，不同的天氣</p>
+      </div>
+      <div class="atlas-theater">
+        <div class="atlas-stage">
+          <img src="a2-open.jpg" alt="日光照亮開放海域中的帆船" data-sea-image="0">
+          <img class="is-current" src="a2-storm.jpg" alt="帆船穿越閃電與風暴" data-sea-image="1">
+          <img src="a2-siren.jpg" alt="青色海水與迷幻雲霞中的塞壬海域" data-sea-image="2">
+          <img src="a2-calypso.jpg" alt="瀑布與棧橋環繞的卡呂普索海灣" data-sea-image="3">
+          <img src="a2-ithaca.jpg" alt="帆船抵達夕陽下的伊薩卡港灣" data-sea-image="4">
+          <span class="stage-lightning" aria-hidden="true"></span>
+          <div class="stage-caption"><span data-sea-english>STORM</span><h3 data-sea-name>風暴</h3><p data-sea-description>即使風浪很大，船仍在你手裡</p></div>
+        </div>
+        <div class="atlas-navigation" role="group" aria-label="選擇海域">
+          <button data-sea="0" aria-pressed="false">開放海域</button>
+          <button data-sea="1" aria-pressed="true">風暴</button>
+          <button data-sea="2" aria-pressed="false">塞壬之海</button>
+          <button data-sea="3" aria-pressed="false">卡呂普索</button>
+          <button data-sea="4" aria-pressed="false">伊薩卡</button>
+        </div>
+      </div>
+      <div class="atlas-current" aria-live="polite"><span>此刻的海象</span><strong data-current-condition>風暴</strong><div class="weather-rose" data-selected="1" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+    </section>
+
+    <section class="companions-section" id="companions" aria-labelledby="companions-heading">
+      <div class="companions-image">
+        <img src="a-scene-4.jpg" alt="夜海裡三艘帆船各自亮著燈火" loading="lazy">
+        <div class="wind-trails" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <div class="companions-copy">
+        <h2 id="companions-heading">遠方<br><em>還有別的帆</em></h2>
+        <p>彼此不必認識，也能為一段航程留下順風</p>
+        <div class="sailor-letter">
+          <span>航行者 · 怡君</span>
+          <strong>「想開一間<br>能看海的書店」</strong>
+          <button class="send-wind" type="button">送一陣風 <span aria-hidden="true">↗</span></button>
+          <p class="wind-status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="harbor-section" id="harbor" aria-labelledby="harbor-heading">
+      <img class="harbor-backdrop" src="a2-ithaca.jpg" alt="日落時分，帆船慢慢進入伊薩卡港" loading="lazy">
+      <div class="harbor-content">
+        <span class="harbor-star" aria-hidden="true">✧</span>
+        <h2 id="harbor-heading">你的伊薩卡<br><em>在什麼地方</em></h2>
+        <p>從今天寫下的第一句開始</p>
+        <a class="button button-gold button-square" href="#top">開始我的航程 <span aria-hidden="true">→</span></a>
+        <small>港灣一直都在，何時靠岸由你決定</small>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Open Odyssey</span><a href="prototypes.html">瀏覽設計原型</a></footer>
+</body>
+</html>
