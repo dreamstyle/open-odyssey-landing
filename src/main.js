@@ -3,26 +3,21 @@ const heroJourney = document.querySelector('.hero-journey');
 const heroStage = document.querySelector('.hero-sticky');
 const heroFrame = document.querySelector('.hero-frame') ?? document.querySelector('.voyage-frame');
 const exploreLink = document.querySelector('.scroll-invitation');
-const isA2Hero = Boolean(document.querySelector('.hero-scene'));
+const hasLayeredHero = Boolean(document.querySelector('.hero-scene'));
 const journalSection = document.querySelector('.journal-section');
 const companionSection = document.querySelector('.companions-section');
 const harborSection = document.querySelector('.harbor-section');
-const motionButton = document.querySelector('.motion-button');
 const systemMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
-let isManuallyReduced = false;
 let isScrollQueued = false;
 
 const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value));
-const isMotionReduced = () => isManuallyReduced || systemMotion.matches;
+const isMotionReduced = () => systemMotion.matches;
 
 function updateMotion() {
   const isReduced = isMotionReduced();
   document.body.classList.toggle('reduced-motion', isReduced);
   document.documentElement.classList.toggle('reduced-motion', isReduced);
-  motionButton.setAttribute('aria-pressed', String(isReduced));
-  motionButton.disabled = systemMotion.matches;
-  motionButton.textContent = systemMotion.matches ? '系統減少動態' : isReduced ? '恢復動態' : '減少動態';
   heroFrame.inert = false;
   if (isReduced) {
     heroStage.style.setProperty('--hero-progress', '0');
@@ -39,12 +34,12 @@ function updateScroll() {
   const heroDistance = Math.max(1, heroJourney.offsetHeight - innerHeight);
   const heroProgress = clamp((scrollY - heroJourney.offsetTop) / heroDistance, 0, 1);
   heroStage.style.setProperty('--hero-progress', heroProgress.toFixed(3));
-  heroFrame.inert = heroProgress > (isA2Hero ? .71 : .48);
+  heroFrame.inert = heroProgress > (hasLayeredHero ? .71 : .48);
 
   for (const [section, target, factor] of [
     [journalSection, '.journal-weather img', 110],
     [journalSection, '.journal-sheet', -45],
-    [companionSection, '.companions-image img', 115],
+    [companionSection, '.companions-image img', 190],
     [harborSection, '.harbor-backdrop', 100],
   ]) {
     const bounds = section.getBoundingClientRect();
@@ -64,7 +59,7 @@ addEventListener('scroll', () => {
   });
 }, { passive: true });
 addEventListener('resize', updateScroll);
-if (isA2Hero) {
+if (hasLayeredHero) {
   heroStage.addEventListener('pointermove', event => {
     if (isMotionReduced() || !finePointer.matches || getComputedStyle(document.querySelector('.hero-scene')).display === 'none') return;
     const bounds = heroStage.getBoundingClientRect();
@@ -84,17 +79,13 @@ if (isA2Hero) {
     scrollTo({ top: heroJourney.offsetTop + distance * .98, behavior: 'smooth' });
   });
 }
-motionButton.addEventListener('click', () => {
-  isManuallyReduced = !isManuallyReduced;
-  updateMotion();
-});
 systemMotion.addEventListener('change', updateMotion);
 updateMotion();
 
 const journalEntries = [
-  { entry: '今天的浪很大\n我想先學會穩住自己', weather: '風暴中，燈還亮著', image: 'a-scene-2.jpg', kind: 'storm' },
-  { entry: '終於把心裡的話說出口\n船好像走得更遠了', weather: '雲漸漸散開，海面透出光', image: 'a2-open.jpg', kind: 'open' },
-  { entry: '聽見好多聲音\n我要找回自己的方向', weather: '水色改變，前方傳來歌聲', image: 'a2-siren.jpg', kind: 'siren' },
+  { entry: '今天的浪很大\n我想先學會穩住自己', weather: '判讀：風暴', image: '/images/journal-storm.jpg', kind: 'storm' },
+  { entry: '終於把心裡的話說出口\n船好像走得更遠了', weather: '判讀：開放海域', image: '/images/sea-open.jpg', kind: 'open' },
+  { entry: '聽見好多聲音\n我要找回自己的方向', weather: '判讀：海妖海域', image: '/images/sea-siren.jpg', kind: 'siren' },
 ];
 const journalImage = document.querySelector('.journal-weather img');
 const writtenEntry = document.querySelector('[data-entry]');
@@ -116,14 +107,14 @@ for (const button of document.querySelectorAll('[data-journal]')) {
 const seas = [
   { english: 'OPEN SEA', name: '開放海域', description: '眼前有許多可能，還不必知道目的地' },
   { english: 'STORM', name: '風暴', description: '即使風浪很大，船仍在你手裡' },
-  { english: 'SIREN WATERS', name: '塞壬之海', description: '美麗的聲音，也可能讓人忘了方向' },
+  { english: 'SIREN WATERS', name: '海妖海域', description: '外界期待或誘惑，正在影響你的方向' },
   { english: 'CALYPSO', name: '卡呂普索', description: '舒服的地方，有時讓人捨不得離開' },
   { english: 'ITHACA', name: '伊薩卡', description: '何時靠岸，由你決定' },
 ];
 const seaButtons = [...document.querySelectorAll('[data-sea]')];
 const seaImages = [...document.querySelectorAll('[data-sea-image]')];
 const atlasStage = document.querySelector('.atlas-stage');
-const weatherRose = document.querySelector('.weather-rose');
+const atlasNavigation = document.querySelector('.atlas-navigation');
 let strikeTimeout;
 function selectSea(index) {
   const sea = seas[index];
@@ -133,9 +124,7 @@ function selectSea(index) {
   document.querySelector('[data-sea-english]').textContent = sea.english;
   document.querySelector('[data-sea-name]').textContent = sea.name;
   document.querySelector('[data-sea-description]').textContent = sea.description;
-  document.querySelector('[data-current-condition]').textContent = sea.name;
-  weatherRose.dataset.selected = String(index);
-  weatherRose.style.setProperty('--sea-turn', [0, 34, -28, 73, -56][index]);
+  atlasNavigation.style.setProperty('--bearing-position', `${10 + index * 20}%`);
   clearTimeout(strikeTimeout);
   atlasStage.classList.remove('is-striking');
   if (index === 1 && !isMotionReduced()) {
@@ -166,6 +155,6 @@ windButton.addEventListener('click', () => {
     companionSection.classList.add('is-windy');
     windTimeout = setTimeout(() => companionSection.classList.remove('is-windy'), 1900);
   }
-  document.querySelector('.wind-status').textContent = '這陣風，已經送向怡君的船';
-  windButton.firstChild.textContent = '再送一陣風 ';
+  document.querySelector('.wind-status').textContent = '已送出鼓勵，Mia 的船會收到一陣順風';
+  windButton.firstChild.textContent = '再次送出鼓勵 ';
 });
